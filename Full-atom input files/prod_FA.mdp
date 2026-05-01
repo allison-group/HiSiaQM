@@ -1,0 +1,54 @@
+; SiaQM_membrane production MD_extended (charmm36)
+
+; RUN parameters 
+integrator              = md
+dt                      = 0.002   
+nsteps                  = 500000000   ;0.002*500000000 = 1000ns = 1 microsecond
+
+;output control
+
+nstxout                 = 0       ; save coordinates 10 ps
+nstvout                 = 0       ; save velocities every 10 ps
+nstfout                 = 0       ; save force every 10 ps
+nstxout-compressed      = 50000   ;.xtc file every 100 ps
+nstenergy               = 50000   ;save energy every 100 ps
+nstlog                  = 50000   ;update log file 100 ps
+
+;
+cutoff-scheme           = Verlet
+nstlist                 = 20
+rlist                   = 1.2
+vdwtype                 = Cut-off
+vdw-modifier            = Force-switch
+rvdw_switch             = 1.0
+rvdw                    = 1.2
+coulombtype             = PME
+rcoulomb                = 1.2
+;
+tcoupl                  = Nose-Hoover
+tc_grps                 = mem_protein water_ions; 2 coupling groups
+tau_t                   =   1.0    1.0
+ref_t                   = 298.15 298.15
+;
+pcoupl                  = Parrinello-Rahman
+pcoupltype              = semiisotropic
+tau_p                   = 2.0
+compressibility         = 4.5e-5  4.5e-5
+ref_p                   = 1.0     1.0
+
+; Periodic boundary conditions
+pbc         = xyz       ; 3-D PBC
+
+;
+constraints             = h-bonds
+constraint_algorithm    = LINCS
+continuation            = yes
+;
+nstcomm                 = 100
+comm_mode               = linear
+comm_grps               = mem_protein water_ions
+
+; Velocity generation
+gen_vel       = no        ; Velocity generation is off
+
+
