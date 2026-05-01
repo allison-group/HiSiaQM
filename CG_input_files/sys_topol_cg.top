@@ -1,0 +1,26 @@
+#define GO_VIRT
+#include "martini_v3.0.0.itp"
+#include "go_atomtypes.itp"
+#include "go_nbparams.itp"
+#include "HiSiaQM.itp"
+#include "martini_v3.0.0_ions_v1.itp"
+#include "martini_v3.0.0_phospholipids_v1.itp"
+#include "martini_v3.0.0_solvents_v1.itp"
+
+[ system ]
+; name
+Protein in INSANE! Membrane UpperLeaflet>POPE:POPG=7.0:3.0 LowerLeaflet>POPE:POPG=7.0:3.0
+
+
+[ molecules ]
+; name  number
+HiSiaQM         1
+NA              2
+POPE           301
+POPG           129
+POPE           303
+POPG           129
+W           29962
+NA               7
+NA            450
+CL            210
